@@ -14,7 +14,7 @@
  * 
  */
 
- import Data from './data.json.js.js'
+ import Data from './data.json.js.js.js'
  import './index.css'
 
  function add(x,y) {
