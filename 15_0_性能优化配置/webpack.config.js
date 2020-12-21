@@ -42,11 +42,12 @@
  *  
  *    速度比较：
  *      eval-source-map 是最快的，其次是inline-source-map, 再其次是cheap这些
+ * 
+ * 
  */
-
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+var path = require('path')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin
 
 module.exports = {
   entry: [
@@ -60,6 +61,20 @@ module.exports = {
   mode: 'development',
   module: {
     rules: [
+      {
+        /**
+         * oneOf内部，对每种文件只能编写一个规则，重复文件类型处理会报错
+         */
+        onfOf: [
+          {
+            test: '/\.js$/',
+            loader: 'eslint-loader',
+            options: {
+              fix: true
+            }
+          }
+        ]
+      },
       {
         // 处理less资源
         test: /\.less$/,

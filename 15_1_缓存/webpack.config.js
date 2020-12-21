@@ -1,15 +1,27 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const MiniCssExtraPlugin = require('mini-css-extract-plugin')
-const OptimizeCssAssetPlugin = require('optimize-css-assets-webpack-plugin')
-const { DefinePlugin } = require('webpack')
+/**
+ * 开发环境的优化配置: 构建打包速度、压缩代码、缓存
+ * 1、oneOf：表示每个文件只能匹配一个loader，被一个loader处理，可以用来提高loader的执行效率
+ *     本来按照书写的顺序，每种文件会被rules里面的配置全部扫描一遍，再对应执行相应的loader；
+ *     但是使用oneOf，能够让每个文件只匹配一个loader， 就不需要再遍历下面的loader了
+ *    注意：不能有两个配置处理同一类型文件
+ * 
+ * 2、缓存
+ *     babel缓存：cacheDirectory, 也就是第一次编译后，
+ *     文件资源缓存：
+ */
+
+var path = require('path')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin
+var MiniCssExtraPlugin = require('mini-css-extract-plugin')
+var OptimizeCssAssetPlugin = require('optimize-css-assets-webpack-plugin')
+// var DefinePlugin = require('webpack').DefinePlugin
 
 // 定义nodejs环境变量：来决定使用browserslist的哪个环境
 process.env.NODE_ENV = 'production'
 
 // 复用loader
-const commonCssLoader = [
+var commonCssLoader = [
   MiniCssExtraPlugin.loader,
           'css-loader',
           {
@@ -34,7 +46,7 @@ const commonCssLoader = [
 module.exports = {
   entry: './src/js/index.js',
   output: {
-    filename: 'js/bundle.js',
+    filename: 'js/bundle.[contenthash:10].js',
     path: path.resolve(__dirname, 'build')
   },
   module: {
@@ -75,7 +87,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          preset: [
+          presets: [
             [
               '@babel/preset-env',
               {
@@ -92,7 +104,10 @@ module.exports = {
                 }
               }
             ]
-          ]
+          ],
+          // 开启babel缓存
+          // 第二次构建时，会读取之前的缓存
+          cacheDirectory: true,
         }
       },
       // 处理图片
@@ -136,11 +151,12 @@ module.exports = {
     }),
     // 将css提取问单独的文件
     new MiniCssExtraPlugin({
-      name: 'css/build.css'
+      filename: 'css/build.[contenthash:10].css'
     }),
     // 压缩css代码
     new OptimizeCssAssetPlugin(),
   ],
   // production 生产模式会自动压缩js代码
-  mode: 'production'
+  mode: 'production',
+  devtool: 'source-map'
 }
