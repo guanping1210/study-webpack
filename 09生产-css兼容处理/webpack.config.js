@@ -51,7 +51,7 @@ module.exports = {
           // 1、使用loader的默认配置
           // 'postcss-loader'
 
-          // 2、修改leader的配置
+          // 2、修改loader的配置
           {
             loader: 'postcss-loader',
             options: {

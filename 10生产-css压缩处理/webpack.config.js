@@ -59,7 +59,7 @@ module.exports = {
       filename: 'css/built.css'
     }),
     // 压缩css
-    // new OptimizeCssAssetsWebpaclPlugin()
+    new OptimizeCssAssetsWebpaclPlugin()
   ],
   devServer: {
     contentBase: path.resolve(__dirname, '/dist'),

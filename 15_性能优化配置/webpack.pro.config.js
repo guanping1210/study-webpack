@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtraPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetPlugin = require('optimize-css-assets-webpack-plugin')
+const { DefinePlugin } = require('webpack')
 
 // 定义nodejs环境变量：来决定使用browserslist的哪个环境
 process.env.NODE_ENV = 'production'

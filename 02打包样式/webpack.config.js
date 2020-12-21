@@ -4,7 +4,6 @@
  * 
  * 目前所有的构建工具都是基于nodejs平台运行的，模块化默认采用commonjs
  * 
- * 
  */
 const path = require('path')
 const { resolve } = path
@@ -19,6 +18,7 @@ const { resolve } = path
     // 输出路径
     // __dirname nodejs的变量，代表当前文件的目录的绝对路径
     path: resolve(__dirname, 'build'), 
+    chunkFilename: '[name].[hash:5].js'
   },
   // loader配置
   module: {
