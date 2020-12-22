@@ -1,0 +1,11 @@
+body {
+  color: yellow;
+}
+
+.demo {
+  width: 100px;
+  height: 100px;
+  background: yellow;
+  color: green;
+}
+

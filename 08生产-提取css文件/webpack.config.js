@@ -33,7 +33,7 @@ module.exports = {
     }),
     new MiniCssExtraPlugin({
       // 对输出的文件重命名，默认是main.css
-      filename: 'css/built.css'
+      filename: 'css/built.css',
     })
   ],
   devServer: {

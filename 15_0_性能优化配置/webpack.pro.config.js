@@ -1,4 +1,5 @@
 /**
+ * 
  * 开发环境的优化配置: 构建打包速度、压缩代码、缓存、tree-shaking
  * 1、oneOf：表示每个文件只能匹配一个loader，被一个loader处理，可以用来提高loader的执行效率
  *     本来按照书写的顺序，每种文件会被rules里面的配置全部扫描一遍，再对应执行相应的loader；
@@ -6,9 +7,9 @@
  *    注意：不能有两个配置处理同一类型文件
  * 
  * 2、缓存
- *     babel缓存：cacheDirectory， 也就是第一次babel编译智慧，第二次构建时，会读取之前的缓存
+ *     babel缓存：cacheDirectory， 也就是第一次babel编译之后，第二次构建时，会读取之前编译的缓存
  *          --> 第二次打包构建速度更快
- *     文件资源缓存：改变文件资源名儿
+ *     文件资源缓存：改变文件资源名儿 --> hash | chunkhash | contenthash
  *          默认是开启的disck磁盘缓存，也就是强缓存。但是导致的问题就是，
  *          当资源编译改变后，读取的内容依然是磁盘缓存，没有改变
  *          解决方案：给output文件，都加上hash值。那么当源码修改后，编译的hash值会变化。
@@ -16,7 +17,8 @@
  *        hash: 每次webpack构建时都会生成一个唯一的hash值
  *            问题: 因为js和css同时使用一个hash值，如果重新打包会导致所有缓存失效（可能只改动了一个文件）
  *        chunkhash:  根据chunk生成的hash值。如果打包来源于同一个chunk，那么hash值是一样的
- *            问题: js和css的hash值还是一样的(因为css是在js中引入的，所以同属于同一个chunk,所以hash值是一样的)
+ *            问题: js和css的hash值还是一样的(因为css是在js中引入的，所以同属于同一个chunk,所以hash值是一样的, 如果把css单独提取出来，查看一下hash是否一致 )
+ *            --> 经过验证：不管css是否单独提取，其hash都与入口hash是一致的。改动css，依然会导致所有的缓存都失效
  *        contenthash: 根据文件的内容生成hash值，不同文件的hash值是一定不一样的
  *            -->  让代码上线运行缓存更好使用
  * 
@@ -46,6 +48,7 @@
  * 9、externals
  * 
  * 10、dll
+ * 
  */
 
 var path = require('path')
