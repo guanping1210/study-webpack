@@ -1,21 +1,14 @@
 
-var path = require('path')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin
 
 module.exports = {
-  // 多入口：有几个入口，最终输出就有几个个bundle，但是比较麻烦
-  // entry: {
-  //   main: './src/js/index.js',
-  //   print: './src/js/print.js'
-  // },
-  entry: './src/js/index.js', //  会将index与print打印为一个文件
+  entry: './src/js/index.js',
   output: {
-    // [name]: 取文件名，就是entry指定的文件名,
-    filename: 'js/[name].[contenthash:10].js',
+    filename: 'js/[name].js',
     path: path.resolve(__dirname, 'build')
   },
-  // plugin
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
@@ -34,11 +27,12 @@ module.exports = {
    */
   optimization: {
     splitChunks: {
-      // 引入的lodash第三方库，单独打包为了一个js文件
+      // 第三方库的所有包，会单独打包成一个单独的js文件
+      // 问题：如果包内容过大，需要划分为较小的单独的包，怎么做？
+      // 解决：1、使用import()动态引入，能够自动分包
       chunks: 'all'
     }
   },
   // production 生产模式会自动压缩js代码
   mode: 'production',
-  devtool: 'source-map'
 }

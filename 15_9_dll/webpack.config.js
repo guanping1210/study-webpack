@@ -74,11 +74,5 @@ module.exports = {
 }
 
 /**
- * externals: 指定哪些包是不需要被编译的
- * 
- * 亲测：jquery库
- *  开启了externals，打包体积只有4.61KB
- *  不开启,打包体积为512KB
- * 
- * 备注：当忽略掉打包的库之后，需要手动在html中加入对应库的CDN连接
+ * DLL：
  */

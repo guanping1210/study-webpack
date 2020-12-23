@@ -1,5 +1,7 @@
 // eslint-disable-next-line
-import _ from 'lodash'
+// import(/* webpackChunkName: lodash */ 'lodash')
+// import _ from 'lodash'
+
 function sum(...args) {
   return Array.from(args).reduce((c, p) => c + p, 0);
 }
@@ -19,3 +21,7 @@ import(/* webpackChunkName: 'print' */ './print')
   .catch(() => {
     console.log('文件加载失败')
   })
+
+
+
+

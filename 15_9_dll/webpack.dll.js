@@ -3,6 +3,7 @@
  *  运行webpack时，默认是查找webpack.config.js配置文件
  *  需求：需要运行webpack.dll.js文件
  *    -->  webpack --config webpack.dll.js
+ *  基本上只需要打包一次，
  */
 const path = require('path')
 const webpack = require('webpack')
@@ -12,10 +13,11 @@ module.exports = {
     // 最终打包生成的[name] --> jquery
     // ['jquery'] --> 要打包的库是jquery
     jquery: ['jquery'],
+    react: ['react']
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirnam, 'dll'),
+    path: path.resolve(__dirname, 'dll'),
     // 表示打包的库里面向外暴露出去的内容叫什么名字
     library: '[name]_[hash]'
   },
