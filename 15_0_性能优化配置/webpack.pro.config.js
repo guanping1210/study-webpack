@@ -14,7 +14,7 @@
  *          当资源编译改变后，读取的内容依然是磁盘缓存，没有改变
  *          解决方案：给output文件，都加上hash值。那么当源码修改后，编译的hash值会变化。
  *                          如果hash变化了，那么会读取最新的hash文件
- *        hash: 每次webpack构建时都会生成一个唯一的hash值
+ *        hash: 每次webpack构建时都会生成一个唯一的hash值,不管内容变不变，只要重新打包，hash值就会改变
  *            问题: 因为js和css同时使用一个hash值，如果重新打包会导致所有缓存失效（可能只改动了一个文件）
  *        chunkhash:  根据chunk生成的hash值。如果打包来源于同一个chunk，那么hash值是一样的
  *            问题: js和css的hash值还是一样的(因为css是在js中引入的，所以同属于同一个chunk,所以hash值是一样的, 如果把css单独提取出来，查看一下hash是否一致 )
