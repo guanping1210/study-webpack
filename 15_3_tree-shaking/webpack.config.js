@@ -66,4 +66,20 @@ module.exports = {
  * 开启方式：
  *  1、mode=production，默认开启
  *  2、mode=development + optimization.usedExports 开启(亲测失败，编译成功，但是并没有shaking掉)
+ * 
+ * 工作原理：最早是由Rollup实现的，是一种采用删除不需要的额外代码的方式优化代码体积的技术
+ *  1、利用 ES6模块特性
+ *     - 只能能作为模块顶层的语句出现
+ *     - import的模块名只能是字符串变量
+ *     - import binding是immutable的，引入的模块不能再进行修改
+ *  2、代码删除
+ *     - uglfiy：判断程序流，判断变量是否被使用和引用，进而代码删除
+ * 简单总结概括原理：
+ *  1、ES6 Module引入进行静态分许，故而编译的时候正确判断到底加载了哪些模块
+ *  2、静态分析程序流，判断那些模块和变量未被使用或引用，进而删除对应代码
+ * 
+ * 资料：
+ *  https://cloud.tencent.com/developer/article/1624085
+ *  https://juejin.cn/post/6844903544756109319
+ * 
  */
