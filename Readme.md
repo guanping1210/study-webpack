@@ -31,3 +31,19 @@
 5、完成模块编译：经过第 4 步使用 Loader 翻译完所有模块后，得到每个模块被翻译后的最终内容以及他们之间的依赖关系
 6、输出资源：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 chunk，再把每个 chunk 转换成一个单独的文件加入到输出列表(这步是可以修改输出内容的最后机会)
 7、输出完成：确定号输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统
+
+### create-react-app 脚手架分析
+
+#### path路径  --> config/paths.js
+ appDirectory 项目根目录
+ resolveApp   生成绝对路径的方法
+ getPublicUrlOrPath  所有资源的公共访问路径： /
+ moduleFileExtensions 文件扩展名，会被react解析到
+ 
+
+#### 开发环境 --> scripts/start.js
+
+
+#### 生产环境 --> scripts/build.js
+
+
