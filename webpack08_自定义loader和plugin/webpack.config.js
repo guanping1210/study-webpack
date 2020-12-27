@@ -4,12 +4,13 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 // 自定义plugin
 const Plugin1 = require('./plugins/Plugin1') 
+const CopyWebpackPlugin = require('./plugins/CopyWebpackPlugin')
 
 
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: 'bunld.js',
+    filename: 'boundle.js',
     path: path.resolve(__dirname, 'dist')
   },
   // 自定义loader测试
@@ -60,7 +61,15 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     // 测试自定义plugin
-    new Plugin1()
+    // new Plugin1(),
+    new CopyWebpackPlugin({
+      // 指定copy的文件来源
+      from: 'public',
+      // 指定文件来源忽略哪些文件
+      ignore: ['**/index.html'],
+      // 指定copy到哪个目录下
+      to: 'css'
+    })
   ],
   // 配置解析loader的规则，默认情况下是node_modules
   // 可以自己添加查找的路径
