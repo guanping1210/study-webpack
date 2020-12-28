@@ -17,6 +17,7 @@ module.exports = {
        *  airbnb规则：eslint-config-airbnb-base
        *             eslint
        *             eslint-plugin-import
+       *  问题：亲测airbnb并没有产生作用
        */
       {
         test: /\.js$/,
@@ -34,5 +35,6 @@ module.exports = {
       template: './src/index.html'
     })
   ],
+  devtool: 'source-map',
   mode: 'development'
 }

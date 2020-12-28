@@ -2,6 +2,10 @@ function add(x) {
   return x + 20;
 }
 
-add(400);
+      add(400);
+
+      
 
 console.log(add(100));
+
+const a = 10

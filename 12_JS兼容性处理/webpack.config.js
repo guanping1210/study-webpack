@@ -14,7 +14,7 @@ module.exports = {
        *              babel  @babel/core
        *  1、基本JS处理 --> @babel/preset-env
        *     问题：只能转换基本语法，如const、箭头函数等，不能转换Promise等高级语法
-       *  2、全部JS兼容性处理 --> @babel/pollyfill (引入即可)
+       *  2、全部JS兼容性处理 --> @babel/polyfill (引入即可)
        *     问题：我只要解决部分兼容性问题，但是将所有兼容性代码全部引入，导致代码体积过大
        *  3、针对需要做兼容性的处理才做：按需加载  --> core-js
        * 

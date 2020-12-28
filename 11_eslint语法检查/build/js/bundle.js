@@ -93,8 +93,20 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("function add(x) {\n  return x + 20\n}\n\n\n\nadd(400)\n\nconsole.log(add(100))\n\n//# sourceURL=webpack:///./src/index.js?");
+function add(x) {
+  return x + 20;
+}
+
+      add(400);
+
+      
+
+console.log(add(100));
+
+const a = 10
+
 
 /***/ })
 
 /******/ });
+//# sourceMappingURL=bundle.js.map

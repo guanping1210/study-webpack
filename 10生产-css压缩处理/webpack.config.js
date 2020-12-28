@@ -10,9 +10,12 @@ const OptimizeCssAssetsWebpaclPlugin = require('optimize-css-assets-webpack-plug
 // process.env.NODE_ENV = 'development'
 
 module.exports = {
-  entry: './js/index.js',
+  entry: {
+    main: './js/index.js',
+    test: './js/index.js'
+  },
   output: {
-    filename: 'js/bundle.js',
+    filename: 'js/[name].js',
     path: path.resolve(__dirname, 'build')
   },
   mode: 'production',
@@ -32,7 +35,13 @@ module.exports = {
           {
             loader: 'postcss-loader',
             // 碰到有兼容性问题，在options下面直接写plugins会有兼容性问题
+            // webpack4的写法是这样的
             options: {
+              // webpack5的写法
+              // plugins: [
+              //   require('postcss-import')()
+              // ],
+              // webpack4 的写法
               postcssOptions: {
                 plugins: [
                   [
@@ -56,7 +65,7 @@ module.exports = {
     }),
     new MiniCssExtraPlugin({
       // 对输出的文件重命名，默认是main.css
-      filename: 'css/built.css'
+      filename: 'css/[name].css',
     }),
     // 压缩css
     new OptimizeCssAssetsWebpaclPlugin()

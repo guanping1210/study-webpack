@@ -24,8 +24,9 @@ module.exports = {
         test: /\.(png|jpeg)$/,
         // 只使用一个loader，可以直接使用loader，不需要使用use
         // 需要下载url-loader file-loader, 因为url-loader是依赖file-loader的
+        // url-loader内部是包含有file-loader模块的
         // use: ['file-loader']
-        loader: 'file-loader',
+        loader: 'url-loader',
         options: {
           // 图片大小小于8KB，就会被base64处理
           // 优点：减少请求数量（减轻服务器压力）

@@ -1,0 +1,119 @@
+def getHost(){
+    def remote = [:]
+	remote.port = 22
+	remote.allowAnyHosts = true
+    App_Host_Placeholder
+    return remote
+}
+space = '------------------------------------------------'
+echo "${space}\n当前选择的构建分支为：${BRANCH}\n${space}"
+echo "${space}\n是否需要部署服务：${DEPLOY}\n${space}"
+echo "${space}\n访问地址：Env_IP_Placeholder:Env_Port_Placeholder\n${space}"
+echo "${space}\n镜像地址：192.168.199.222/Project_Folder_Placeholder/Project_Name_Placeholder:Version_Placeholder\n${space}"
+pipeline{
+    agent any
+
+    stages {
+
+        stage('Build') {
+            steps{
+				script {
+					sh 'yarn'
+					//sh 'yarn build --env.version=dev'
+					App_Build_Placeholder
+				}
+            }
+        }
+
+        stage('Make Images') {
+            steps{
+                sh ' docker login -uadmin -p123456 192.168.199.222'
+				echo "${space}\n2、制作镜像\n${space}"
+				script {
+                	//sh 'cd /var/jenkins_home/workspace/${JOB_NAME}/ && docker build -t 192.168.199.222/cybercube/cybercube:dev . && docker push 192.168.199.222/cybercube/cybercube:dev'
+					Make_Images_Placeholder
+				}
+            }
+        }
+
+         stage('Deploy Images'){
+            steps {
+                script {
+					if(env.DEPLOY == 'true'){
+						echo "${space}\n3、部署服务\n${space}"
+						server = getHost()
+						/***
+						sshCommand remote: server, command: """
+cat >docker-compose-cybercube.yml<<EOF
+#VERSION:dev
+version: '3.4'
+services:
+	cybercube:
+		image: 192.168.199.222/cybercube/cybercube:dev
+		restart: always
+		ports:
+			- 192.168.199.226:80
+		environment:
+			version: dev
+			apirepo: http://192.168.199.133:9001
+            apidatahub: http://192.168.101.151:18086
+            api: http://192.168.199.102:5555
+            hub: http://192.168.199.134:8000/hub
+            user: http://192.168.199.134:8000/user
+            repository: http://192.168.199.133:8080/repository
+            cybersphere: http://192.168.199.22/cybersphere
+            datasetApi: http://192.168.101.151:18086
+            datahubset: http://192.168.101.151:17085/datahubset
+            datahubvisual: http://192.168.199.143:17084/datahubvisual
+            external_environment: '{"dev":{"ssoOrigin":"http://192.168.199.235:38092"},"12.0.1":{"name":"cybercube","ssoOrigin":"http://192.168.199.235:38092"}}'
+
+		volumes:
+			- /opt/data/nginx:/opt/nginx
+EOF
+							"""
+						sshCommand remote: server, command: """
+							docker login -uadmin -p123456 192.168.199.222 && docker-compose -f docker-compose-cybercube.yml pull && docker-compose -f docker-compose-cybercube.yml up -d
+						"""
+						***/
+						Deploy_Images_Placeholder
+                	}else {
+						echo "${space}\n3、不需要部署\n${space}"
+					}
+				}
+            }
+        }
+    }
+
+    post {
+        success {
+            emailext (
+                subject: "'${env.JOB_NAME} [${env.BUILD_NUMBER}]' 更新正常",
+                body: """
+                详情：
+                SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'
+                状态：${env.JOB_NAME} jenkins 更新运行正常
+                URL ：${env.BUILD_URL}
+                项目名称 ：${env.JOB_NAME}
+                项目更新进度：${env.BUILD_NUMBER}
+                """,
+                to: "mb.chen@cyber-insight.com",
+                recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                )
+                }
+        failure {
+            emailext (
+                subject: "'${env.JOB_NAME} [${env.BUILD_NUMBER}]' 更新失败",
+                body: """
+                详情：
+                FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'
+                状态：${env.JOB_NAME} jenkins 运行失败
+                URL ：${env.BUILD_URL}
+                项目名称 ：${env.JOB_NAME}
+                项目更新进度：${env.BUILD_NUMBER}
+                """,
+                to: "mb.chen@cyber-insight.com",
+                recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                )
+                }
+    }
+}
