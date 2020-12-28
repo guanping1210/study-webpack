@@ -1,6 +1,6 @@
 
 const fs = require('fs')
-// const path = require('path')
+const path = require('path')
 // 解析AST
 const babelParse = require('@babel/parser')
 // 收集依赖
