@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 // import(/* webpackChunkName: lodash */ 'lodash')
-// import _ from 'lodash'
+import _ from 'lodash'
 
 function sum(...args) {
   return Array.from(args).reduce((c, p) => c + p, 0);

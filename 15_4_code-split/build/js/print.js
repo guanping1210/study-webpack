@@ -1,1 +1,1 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[1],[,function(n,o,t){"use strict";t.r(o),t.d(o,"print",(function(){return c})),t.d(o,"add",(function(){return i})),console.log("我要变身啦");const c=(n,o)=>n%o,i=(n,o)=>n+o}]]);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{4:function(n,o,t){"use strict";t.r(o),t.d(o,"print",(function(){return c})),t.d(o,"add",(function(){return i})),console.log("我要变身啦");const c=(n,o)=>n%o,i=(n,o)=>n+o}}]);

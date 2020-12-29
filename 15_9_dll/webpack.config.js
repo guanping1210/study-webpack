@@ -53,7 +53,8 @@ module.exports = {
         }),
         // 告诉webpack，哪些库不参与打包，同时使用时的名称也得改
         new webpack.DllReferencePlugin({
-            manifest: path.resolve(__dirname, 'dll/manifset.json')
+            manifest: path.resolve(__dirname, 'dll/manifset.json'),
+            name: 'test.js'
         }),
         // 将某个文件打包并输出去，并在html中自动引入该文件
         new AddAssetHtmlWebpackPlugin({
