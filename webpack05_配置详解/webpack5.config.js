@@ -23,4 +23,5 @@ module.exports = {
  *  4、清除处于怪异状态的内部结果，同时在v4中实现功能而不引入任何重大改变
  *  
  *  changelog: http://github.com/webpack/changelog-v5
+ *  中文文档：https://segmentfault.com/a/1190000037460742
  */

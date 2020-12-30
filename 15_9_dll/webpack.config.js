@@ -52,9 +52,10 @@ module.exports = {
             template: './src/index.html',
         }),
         // 告诉webpack，哪些库不参与打包，同时使用时的名称也得改
+        // manifest和context必须同时存在
         new webpack.DllReferencePlugin({
             manifest: path.resolve(__dirname, 'dll/manifset.json'),
-            name: 'test.js'
+            context: path.resolve(__dirname, '../'),
         }),
         // 将某个文件打包并输出去，并在html中自动引入该文件
         new AddAssetHtmlWebpackPlugin({
