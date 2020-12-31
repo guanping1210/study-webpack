@@ -17,7 +17,7 @@
  *          emit: 生成资源道output目录之前，修改源码的最后机会
  *          done: 编译完成
  * 
- * 
+ * 资料： https://aotu.io/notes/2020/07/17/webpack-analize/index.html
  * 
  * 
  */
