@@ -1,11 +1,12 @@
 /**
  * loader本质上是一个函数
  */
+
 // 用来获取loader的options配置
 const { getOptions } = require('loader-utils')
 // 验证options是否复合规范  --> 规则写在schema.json文件中
 const { validate } = require('schema-utils')
-const schema = require('./schema')
+const schema = require('./schema.json')
 
 module.exports = function(content, map, meta) {
   console.log('打印内容3333', content)

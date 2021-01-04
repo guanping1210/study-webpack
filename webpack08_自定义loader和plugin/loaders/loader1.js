@@ -26,7 +26,6 @@ module.exports = function(content, map, meta) {
   setTimeout(() => {
     callback(null, content)
   }, 1000)
-
 }
 
 

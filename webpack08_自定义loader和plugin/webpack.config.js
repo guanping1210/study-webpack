@@ -10,7 +10,7 @@ const CopyWebpackPlugin = require('./plugins/CopyWebpackPlugin')
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: 'boundle.js',
+    filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
   // 自定义loader测试
