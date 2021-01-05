@@ -68,7 +68,7 @@ module.exports = {
       // 指定文件来源忽略哪些文件
       ignore: ['**/index.html'],
       // 指定copy到哪个目录下
-      to: 'css'
+      to: 'css',
     })
   ],
   // 配置解析loader的规则，默认情况下是node_modules

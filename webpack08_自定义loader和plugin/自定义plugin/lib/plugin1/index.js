@@ -1,7 +1,6 @@
 class MyPlugin {
-    constructor(options = {}) {
-        this.options = options
-        console.log(2222)
+    apply() {
+        console.log(454545)
     }
 }
 
