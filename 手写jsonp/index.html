@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>测试jsonp</p>
+    <script>
+      function jsonpCallback(data) {
+        console.log("获得jsonp的数据", data);
+      }
+
+      const jsonpAjax = async () => {
+        const url = `http://192.168.32.49:8080/jsonp?callback=jsonpCallback`;
+        const script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        script.src = url;
+        document.body.appendChild(script);
+      };
+
+      jsonpAjax();
+    </script>
+  </body>
+</html>
