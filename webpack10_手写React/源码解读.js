@@ -1,5 +1,6 @@
     /**
     * React理念：CUP + IO -->  同步递归更新 变为 异步循环可中断更新
+    * 
     * React15：Reconciler协调器(递归处理虚拟DOM ) + Renderer渲染器(将变化的组件渲染到页面上)，交替更新执行（同步递归更新无法中断）
     *              x2
     *          1  --> reconciler发现1需要变为2，通知renderer,renderer把1变为2，渲染到页面上 --> 2
@@ -142,11 +143,18 @@
     *          第一轮遍历：处理更新的节点
     *          第二轮遍历：处理剩下的不属于更新的节点
     *
-    * update分类：
+    * update：
+    *   分类：
     *      HostRoot --> 原生DOM --> 触发方式：render
     *      ClassComponent --> class组件 --> 触发方式：this.state, this.forceUpdate
     *      FunctionComponent --> function组件 --> 触发方式：useState, useReducer
+    *   
+    *   结构：由createUpdate方法返回
+    *       eventTime: 任务时间，通过performance.now() 获取的毫秒数
+    *       
+    *  
     *
+    * 
     * 
     * 
     * 继续源码阅读：https://react.iamkasong.com/state/update.html#update%E7%9A%84%E7%BB%93%E6%9E%84
